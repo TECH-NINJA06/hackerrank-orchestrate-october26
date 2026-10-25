@@ -37,6 +37,24 @@ Run the starter Python entry point with:
 python3 code/main.py
 ```
 
+### Model provider configuration
+
+The agent uses Gemini as the primary provider and Groq as a fallback for
+JSON/text model calls. Copy `.env.example` to `.env` and set the provider
+keys locally; `.env` is ignored and must not be included in a submission:
+
+```text
+GEMINI_API_KEY=...
+GROQ_API_KEY=...
+AUDIT_INTENT_MODEL=gemini-3.1-pro-preview
+AUDIT_VLM_MODEL=gemini-3.1-pro-preview
+AUDIT_GROQ_MODEL=llama-3.3-70b-versatile
+```
+
+The deterministic corpus extraction path handles the supplied evidence
+without requiring a model call. Groq is used when a Gemini JSON/text call
+fails or is unavailable.
+
 The blank template at `dataset/output.csv` is provided as a reference. Your final generated file for submission must be the root-level `output.csv`.
 
 

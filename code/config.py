@@ -31,6 +31,12 @@ class AuditConfig:
     intent_model_name: str = field(
         default_factory=lambda: os.environ.get("AUDIT_INTENT_MODEL", "gemini-2.5-flash")
     )
+    groq_model_name: str = field(
+        default_factory=lambda: os.environ.get(
+            "AUDIT_GROQ_MODEL", "llama-3.3-70b-versatile"
+        )
+    )
+    last_provider_error: str = ""
 
     # Token pricing (USD per 1M tokens) for `code/evaluation/usage_report.md`
     MODEL_PRICING_PER_1M: Dict[str, Tuple[float, float]] = field(
@@ -39,6 +45,7 @@ class AuditConfig:
             "gemini-2.5-pro": (1.25, 10.00),
             "gpt-4o-mini": (0.15, 0.60),
             "claude-3-5-sonnet": (3.00, 15.00),
+            "llama-3.3-70b-versatile": (0.59, 0.79),
         }
     )
 

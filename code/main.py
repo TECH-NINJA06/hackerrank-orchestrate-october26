@@ -26,6 +26,7 @@ if str(CODE_DIR) not in sys.path:
     sys.path.insert(0, str(CODE_DIR))
 
 from config import AuditConfig
+from providers import load_local_env
 from schemas import AuditCaseInput, AuditCaseOutput
 from telemetry import TokenUsageTracker
 from agents.orchestrator import AuditOrchestrator
@@ -229,6 +230,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     start_time = time.perf_counter()
+    load_local_env(REPO_ROOT)
 
     config = AuditConfig(
         repo_root=REPO_ROOT,
